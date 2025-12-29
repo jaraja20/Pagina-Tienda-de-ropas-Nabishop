@@ -7,12 +7,20 @@ import base64
 from urllib.parse import urlparse, parse_qs
 from pathlib import Path
 
+# Importar módulo de base de datos
+try:
+    from db_connection import NabbyShopDB, DatabaseConfig
+    USE_DATABASE = True
+except ImportError:
+    USE_DATABASE = False
+    print("⚠️ Módulo db_connection no encontrado. Usando JSON como fallback.")
+
 PORT = 8000
 DIRECTORY = os.path.dirname(os.path.abspath(__file__))
 DATA_FILE = os.path.join(DIRECTORY, 'nabby_data.json')
 
 def load_data():
-    """Cargar datos persistentes"""
+    """Cargar datos persistentes (JSON fallback)"""
     if os.path.exists(DATA_FILE):
         try:
             with open(DATA_FILE, 'r', encoding='utf-8') as f:
@@ -22,7 +30,7 @@ def load_data():
     return {'custom_products': {}, 'catalog_edits': {}}
 
 def save_data(data):
-    """Guardar datos persistentes"""
+    """Guardar datos persistentes (JSON fallback)"""
     try:
         with open(DATA_FILE, 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
@@ -49,8 +57,18 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             self.send_header('Content-type', 'application/json')
             self.send_header('Access-Control-Allow-Origin', '*')
             self.end_headers()
-            data = load_data()
-            self.wfile.write(json.dumps(data).encode('utf-8'))
+            
+            if USE_DATABASE:
+                try:
+                    products = NabbyShopDB.get_all_products()
+                    data = {'products': products}
+                except Exception as e:
+                    print(f"Error obteniendo datos de BD: {e}")
+                    data = load_data()
+            else:
+                data = load_data()
+            
+            self.wfile.write(json.dumps(data, default=str).encode('utf-8'))
             return
         
         # Continuar con el comportamiento normal
@@ -65,32 +83,78 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             # Parsear JSON
             request_data = json.loads(body.decode('utf-8'))
             
-            # API para guardar productos
+            # API para crear/guardar productos
             if self.path == '/api/save-products':
-                data = load_data()
-                data['custom_products'] = request_data.get('custom_products', {})
-                if save_data(data):
-                    self.send_response(200)
-                    self.send_header('Content-type', 'application/json')
-                    self.send_header('Access-Control-Allow-Origin', '*')
-                    self.end_headers()
-                    self.wfile.write(json.dumps({'status': 'success'}).encode('utf-8'))
+                if USE_DATABASE:
+                    try:
+                        # Guardar cada producto
+                        products = request_data.get('products', [])
+                        for product in products:
+                            result = NabbyShopDB.create_product(product)
+                        
+                        self.send_response(200)
+                        self.send_header('Content-type', 'application/json')
+                        self.send_header('Access-Control-Allow-Origin', '*')
+                        self.end_headers()
+                        self.wfile.write(json.dumps({
+                            'status': 'success',
+                            'message': f'{len(products)} producto(s) guardado(s) en la BD'
+                        }).encode('utf-8'))
+                        return
+                    except Exception as e:
+                        raise Exception(f"Error en BD: {str(e)}")
                 else:
-                    raise Exception("No se pudo guardar")
-                return
+                    data = load_data()
+                    data['custom_products'] = request_data.get('custom_products', {})
+                    if save_data(data):
+                        self.send_response(200)
+                        self.send_header('Content-type', 'application/json')
+                        self.send_header('Access-Control-Allow-Origin', '*')
+                        self.end_headers()
+                        self.wfile.write(json.dumps({'status': 'success'}).encode('utf-8'))
+                    else:
+                        raise Exception("No se pudo guardar")
+                    return
+            
+            # API para actualizar productos
+            if self.path.startswith('/api/update-product/'):
+                if USE_DATABASE:
+                    try:
+                        product_id = int(self.path.split('/')[-1])
+                        result = NabbyShopDB.update_product(product_id, request_data)
+                        
+                        self.send_response(200)
+                        self.send_header('Content-type', 'application/json')
+                        self.send_header('Access-Control-Allow-Origin', '*')
+                        self.end_headers()
+                        self.wfile.write(json.dumps(result).encode('utf-8'))
+                        return
+                    except Exception as e:
+                        raise Exception(f"Error actualizando: {str(e)}")
             
             # API para guardar ediciones
             if self.path == '/api/save-edits':
-                data = load_data()
-                data['catalog_edits'] = request_data.get('catalog_edits', {})
-                if save_data(data):
-                    self.send_response(200)
-                    self.send_header('Content-type', 'application/json')
-                    self.send_header('Access-Control-Allow-Origin', '*')
-                    self.end_headers()
-                    self.wfile.write(json.dumps({'status': 'success'}).encode('utf-8'))
+                if USE_DATABASE:
+                    # Guardar en catálogo de ediciones
+                    data = load_data()
+                    data['catalog_edits'] = request_data.get('catalog_edits', {})
+                    if save_data(data):
+                        self.send_response(200)
+                        self.send_header('Content-type', 'application/json')
+                        self.send_header('Access-Control-Allow-Origin', '*')
+                        self.end_headers()
+                        self.wfile.write(json.dumps({'status': 'success'}).encode('utf-8'))
                 else:
-                    raise Exception("No se pudo guardar")
+                    data = load_data()
+                    data['catalog_edits'] = request_data.get('catalog_edits', {})
+                    if save_data(data):
+                        self.send_response(200)
+                        self.send_header('Content-type', 'application/json')
+                        self.send_header('Access-Control-Allow-Origin', '*')
+                        self.end_headers()
+                        self.wfile.write(json.dumps({'status': 'success'}).encode('utf-8'))
+                    else:
+                        raise Exception("No se pudo guardar")
                 return
         
         except Exception as e:
