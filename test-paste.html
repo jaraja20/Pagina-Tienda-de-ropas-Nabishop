@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Paste Images</title>
+    <style>
+        body {
+            font-family: Arial;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        
+        .paste-zone {
+            border: 3px dashed #ccc;
+            padding: 30px;
+            text-align: center;
+            border-radius: 8px;
+            background: #f9f9f9;
+            margin: 20px 0;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .paste-zone:focus {
+            border-color: #4CAF50;
+            background: #f0f8f0;
+            outline: none;
+        }
+        
+        .preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .preview img {
+            max-width: 100%;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        
+        .log {
+            background: #222;
+            color: #0f0;
+            font-family: monospace;
+            padding: 10px;
+            border-radius: 4px;
+            max-height: 200px;
+            overflow-y: auto;
+            font-size: 12px;
+            margin-top: 20px;
+        }
+        
+        .log-entry {
+            margin: 2px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>🖼️ Test: Paste Images (Ctrl+V)</h1>
+    
+    <p><strong>Instrucciones:</strong></p>
+    <ol>
+        <li>Copia una imagen (Ctrl+C en una imagen de Internet o desde tu carpeta)</li>
+        <li>Haz clic abajo para enfocar el área</li>
+        <li>Presiona Ctrl+V</li>
+        <li>La imagen debería aparecer abajo</li>
+    </ol>
+    
+    <div class="paste-zone" id="pasteZone" tabindex="0">
+        👆 Haz clic aquí, luego presiona <strong>Ctrl+V</strong>
+    </div>
+    
+    <div class="preview" id="preview"></div>
+    
+    <h3>📝 Eventos detectados:</h3>
+    <div class="log" id="log"></div>
+    
+    <script>
+        const pasteZone = document.getElementById('pasteZone');
+        const preview = document.getElementById('preview');
+        const log = document.getElementById('log');
+        
+        function addLog(msg) {
+            const entry = document.createElement('div');
+            entry.className = 'log-entry';
+            entry.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
+            log.insertBefore(entry, log.firstChild);
+            if (log.children.length > 20) log.removeChild(log.lastChild);
+        }
+        
+        // Event: Click
+        pasteZone.addEventListener('click', () => {
+            pasteZone.focus();
+            addLog('✓ Click detectado - Área enfocada');
+        });
+        
+        // Event: Focus
+        pasteZone.addEventListener('focus', () => {
+            addLog('✓ Focus detectado - Listo para Ctrl+V');
+        });
+        
+        // Event: Paste en el zona
+        pasteZone.addEventListener('paste', (e) => {
+            addLog('✓✓✓ PASTE en pasteZone detectado');
+            handlePaste(e);
+        });
+        
+        // Event: Paste global
+        document.addEventListener('paste', (e) => {
+            addLog('✓ Paste global detectado');
+            handlePaste(e);
+        });
+        
+        // Event: KeyDown
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 'v') {
+                addLog('🔑 Ctrl+V presionado (keydown)');
+            }
+        });
+        
+        function handlePaste(event) {
+            const items = event.clipboardData.items;
+            addLog(`📦 Clipboard items: ${items.length}`);
+            
+            for (let i = 0; i < items.length; i++) {
+                addLog(`   Item ${i}: kind='${items[i].kind}' type='${items[i].type}'`);
+                
+                if (items[i].kind === 'file' && items[i].type.indexOf('image') !== -1) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    
+                    addLog('✓✓✓ IMAGEN encontrada!');
+                    
+                    const file = items[i].getAsFile();
+                    const reader = new FileReader();
+                    
+                    reader.onload = (e) => {
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        preview.appendChild(img);
+                        addLog(`✓ Imagen agregada: ${file.name}`);
+                    };
+                    
+                    reader.readAsDataURL(file);
+                }
+            }
+        }
+        
+        addLog('🟢 Sistema listo');
+        pasteZone.focus();
+    </script>
+</body>
+</html>

@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NabbyShop - Urban Aesthetic Fashion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@300;400;500;600;700&family=Rajdhani:wght@300;400;500;600;700&family=Noto+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-purple: #6B4E9F;
+            --dark-purple: #3D2E52;
+            --deeper-purple: #2A1F3D;
+            --light-purple: #9B7ECE;
+            --accent-purple: #8B6BC4;
+            --black: #0A0A0A;
+            --white: #FFFFFF;
+            --gray: #1A1A1A;
+            --light-gray: #F5F5F5;
+        }
+
+        body {
+            font-family: 'Noto Sans', sans-serif;
+            background-color: var(--white);
+            color: var(--black);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Typography matching NABBY logo style */
+        .nabby-font {
+            font-family: 'Teko', 'Rajdhani', sans-serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Header */
+        .header {
+            background: var(--white);
+            box-shadow: 0 2px 20px rgba(107, 78, 159, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .top-banner {
+            background: linear-gradient(135deg, var(--dark-purple), var(--primary-purple));
+            color: var(--white);
+            text-align: center;
+            padding: 12px;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.02);
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 45px;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--black);
+            font-weight: 700;
+            font-size: 15px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            position: relative;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-purple);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-purple);
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav-icons a {
+            color: var(--black);
+            text-decoration: none;
+            font-size: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-icons a:hover {
+            color: var(--primary-purple);
+            transform: translateY(-2px);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--primary-purple);
+            color: var(--white);
+            font-size: 10px;
+            font-weight: 700;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--deeper-purple) 0%, var(--dark-purple) 50%, var(--primary-purple) 100%);
+            padding: 120px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255, 255, 255, 0.03) 35px, rgba(255, 255, 255, 0.03) 70px);
+            pointer-events: none;
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 72px;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 25px;
+            color: var(--white);
+            font-family: 'Teko', sans-serif;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .hero-content .highlight {
+            background: linear-gradient(135deg, var(--light-purple), var(--white));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+        }
+
+        .hero-content p {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 45px;
+            max-width: 500px;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 16px 40px;
+            border: none;
+            border-radius: 0;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .btn-primary {
+            background: var(--white);
+            color: var(--dark-purple);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-secondary:hover {
+            background: var(--white);
+            color: var(--dark-purple);
+        }
+
+        .hero-image {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-logo {
+            width: 100%;
+            max-width: 500px;
+            filter: drop-shadow(0 20px 60px rgba(155, 126, 206, 0.5));
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+        }
+
+        /* Categories Section */
+        .categories {
+            padding: 100px 40px;
+            background: var(--white);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 52px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--black);
+            font-family: 'Teko', sans-serif;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 60px;
+        }
+
+        .section-title span {
+            color: var(--primary-purple);
+        }
+
+        .categories-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .category-card {
+            position: relative;
+            height: 450px;
+            border-radius: 0;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            background: var(--light-gray);
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 0%, rgba(42, 31, 61, 0.95) 100%);
+            z-index: 1;
+            transition: all 0.4s ease;
+        }
+
+        .category-card:hover::before {
+            background: linear-gradient(to bottom, transparent 0%, rgba(107, 78, 159, 0.95) 100%);
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(107, 78, 159, 0.25);
+        }
+
+        .category-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 120px;
+            color: var(--primary-purple);
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .category-info {
+            position: absolute;
+            bottom: 40px;
+            left: 40px;
+            right: 40px;
+            z-index: 2;
+            color: var(--white);
+        }
+
+        .category-info h3 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            font-family: 'Teko', sans-serif;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .category-info p {
+            font-size: 14px;
+            opacity: 0.95;
+            margin-bottom: 15px;
+        }
+
+        .category-link {
+            color: var(--white);
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: gap 0.3s ease;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .category-card:hover .category-link {
+            gap: 12px;
+        }
+
+        /* Products Section */
+        .products {
+            padding: 100px 40px;
+            background: var(--light-gray);
+        }
+
+        .products-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 0;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(107, 78, 159, 0.15);
+            border-color: var(--primary-purple);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, var(--deeper-purple), var(--primary-purple));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image i {
+            font-size: 100px;
+            opacity: 0.8;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--white);
+            color: var(--dark-purple);
+            padding: 6px 16px;
+            border-radius: 0;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .product-badge.sale {
+            background: #FF4757;
+            color: var(--white);
+        }
+
+        .product-info {
+            padding: 25px;
+        }
+
+        .product-category {
+            font-size: 11px;
+            color: var(--primary-purple);
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .product-info h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--black);
+            font-family: 'Teko', sans-serif;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .product-info p {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-price {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--black);
+            font-family: 'Teko', sans-serif;
+        }
+
+        .product-price span {
+            color: var(--primary-purple);
+        }
+
+        .add-to-cart {
+            background: var(--dark-purple);
+            color: var(--white);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 0;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .add-to-cart:hover {
+            background: var(--primary-purple);
+        }
+
+        /* Newsletter Section */
+        .newsletter {
+            background: linear-gradient(135deg, var(--deeper-purple), var(--dark-purple), var(--primary-purple));
+            padding: 100px 40px;
+            color: var(--white);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .newsletter::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255, 255, 255, 0.02) 35px, rgba(255, 255, 255, 0.02) 70px);
+        }
+
+        .newsletter-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .newsletter h2 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            font-family: 'Teko', sans-serif;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .newsletter p {
+            font-size: 16px;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 0;
+            max-width: 600px;
+            margin: 0 auto;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 20px 25px;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            font-size: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .newsletter-form input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .newsletter-form button {
+            padding: 20px 40px;
+            background: var(--white);
+            color: var(--dark-purple);
+            border: none;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .newsletter-form button:hover {
+            background: var(--light-purple);
+            color: var(--white);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--black);
+            color: var(--white);
+            padding: 80px 40px 30px;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 50px;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .footer-logo img {
+            height: 50px;
+            width: auto;
+            filter: brightness(0) invert(1);
+        }
+
+        .footer-brand p {
+            color: #999;
+            margin-bottom: 25px;
+            line-height: 1.8;
+            max-width: 400px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            background: var(--dark-purple);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 18px;
+        }
+
+        .social-links a:hover {
+            background: var(--primary-purple);
+            transform: translateY(-3px);
+        }
+
+        .footer-links h4 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: var(--white);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-family: 'Teko', sans-serif;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 14px;
+        }
+
+        .footer-links ul li a {
+            color: #999;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            display: inline-block;
+        }
+
+        .footer-links ul li a:hover {
+            color: var(--primary-purple);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 40px;
+            border-top: 1px solid #222;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #666;
+            font-size: 13px;
+        }
+
+        .payment-methods {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .payment-methods i {
+            font-size: 24px;
+            color: #666;
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            background: none;
+            border: none;
+            color: var(--black);
+            cursor: pointer;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content h1 {
+                font-size: 52px;
+            }
+
+            .hero-content p {
+                margin: 0 auto 40px;
+            }
+
+            .cta-buttons {
+                justify-content: center;
+            }
+
+            .hero-logo {
+                max-width: 350px;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero-content h1 {
+                font-size: 38px;
+            }
+
+            .section-title {
+                font-size: 36px;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="top-banner">
+            ENVÍO GRATIS EN PEDIDOS SUPERIORES A $50 | NUEVA COLECCIÓN DISPONIBLE
+        </div>
+        <nav class="nav-container">
+            <a href="#" class="logo">
+                <img src="data:image/webp;base64,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                                                                                                                                                                               MraFOTJD3iVJ/zKmo+lV0Gz4CDvZLwuiMMvqrSYqL0BnhTcUCMVrksqUx1e9Z8FNw+7kUZhv/KT0BcWCdNNXReu3RCqYdwp0knPd4DSYb4/kVbhdTkFLzrVLhBjQdKdF/rqDIP5eXOj/gBoq/1YE/pJuki4ut6FCi               i1NCY6HokOWJiw5EL1CqqxoSL0rDcwlxnXTgC68DoMhnC0pNoTqu2JqpAzotx742SvOpqZzieTRaKff/PAr/KUEfAzi9s2Ywv/teMQjwWxRymBXyAYYuGcNVrlXCjG6Bp0XR1OmJlo7vpbS8a1FKV3Ci+Dl9BVycR               RyxOVpWadLk7GuoD+iiCZuVlPchgWY5RIwZwISgxoeJZkvjqT/Pa8kpJjTUgwdDZ9WZSXqrqVj4WRlW7T/h2k1D4fMcR6rc+fdRZZFe7EmDbNea8F+FPsKYbCb94kkfnKNjLD0Yaq4yvnGW+7urdZ3TrPp4wDqDCc               czrtZbGRWozPYzQrVtNOUxG9im1G8z6xXNHRYSMkBJtmiSoAba/EsjMct8v6NTBaO6qUsIz+ZlXX10z9+/pEpXSu67rzwrrsSoFze1OX4ww+jWAOPt8lhTaSq5x/5Zi/lKoB9UTUTnA5SIYa0BWGIlnJ4kkjdNSvO               O/kvXItWwQOsLgVPyYFV6RUINZYqr0NEn20M5EmfVL14T5mrdBFoBMgLiJNEzZrgFOTBh3Nt7OCLvL+Bydih15ML9xOx6gQa43IGt6OCK2WAccFKFUq0vuy6IJUY68pPa4gJeoRGf3UFkoNreHGwCs0nl/YF5+6gN               NaSusUDEkeQE+yVoobKOpoIf3vnFCxnRtJgihEpQjYh6AZSEI8i3FHgtLAjgQAAAA" alt="NabbyShop Logo">
+            </a>
+            <ul class="nav-menu">
+                <li><a href="#nuevos">Nuevos</a></li>
+                <li><a href="#mujer">Mujer</a></li>
+                <li><a href="#hombre">Hombre</a></li>
+                <li><a href="#accesorios">Accesorios</a></li>
+                <li><a href="#sale">Sale</a></li>
+            </ul>
+            <button class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="nav-icons">
+                <a href="#" title="Buscar"><i class="fas fa-search"></i></a>
+                <a href="#" title="Cuenta"><i class="fas fa-user"></i></a>
+                <a href="#" title="Favoritos"><i class="fas fa-heart"></i></a>
+                <a href="#" title="Carrito" style="position: relative;">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-badge">3</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>
+                    Urban Style
+                    <span class="highlight">Aesthetic Vibes</span>
+                </h1>
+                <p>Descubre nuestra nueva colección de moda urbana. Estilo único para quienes se atreven a ser diferentes y expresar su autenticidad.</p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-primary">Explorar Colección</a>
+                    <a href="#" class="btn btn-secondary">Ver Ofertas</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="data:image/webp;base64,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                                                                                                                                                                               MraFOTJD3iVJ/zKmo+lV0Gz4CDvZLwuiMMvqrSYqL0BnhTcUCMVrksqUx1e9Z8FNw+7kUZhv/KT0BcWCdNNXReu3RCqYdwp0knPd4DSYb4/kVbhdTkFLzrVLhBjQdKdF/rqDIP5eXOj/gBoq/1YE/pJuki4ut6FCi               i1NCY6HokOWJiw5EL1CqqxoSL0rDcwlxnXTgC68DoMhnC0pNoTqu2JqpAzotx742SvOpqZzieTRaKff/PAr/KUEfAzi9s2Ywv/teMQjwWxRymBXyAYYuGcNVrlXCjG6Bp0XR1OmJlo7vpbS8a1FKV3Ci+Dl9BVycR               RyxOVpWadLk7GuoD+iiCZuVlPchgWY5RIwZwISgxoeJZkvjqT/Pa8kpJjTUgwdDZ9WZSXqrqVj4WRlW7T/h2k1D4fMcR6rc+fdRZZFe7EmDbNea8F+FPsKYbCb94kkfnKNjLD0Yaq4yvnGW+7urdZ3TrPp4wDqDCc               czrtZbGRWozPYzQrVtNOUxG9im1G8z6xXNHRYSMkBJtmiSoAba/EsjMct8v6NTBaO6qUsIz+ZlXX10z9+/pEpXSu67rzwrrsSoFze1OX4ww+jWAOPt8lhTaSq5x/5Zi/lKoB9UTUTnA5SIYa0BWGIlnJ4kkjdNSvO               O/kvXItWwQOsLgVPyYFV6RUINZYqr0NEn20M5EmfVL14T5mrdBFoBMgLiJNEzZrgFOTBh3Nt7OCLvL+Bydih15ML9xOx6gQa43IGt6OCK2WAccFKFUq0vuy6IJUY68pPa4gJeoRGf3UFkoNreHGwCs0nl/YF5+6gN               NaSusUDEkeQE+yVoobKOpoIf3vnFCxnRtJgihEpQjYh6AZSEI8i3FHgtLAjgQAAAA" alt="NabbyShop" class="hero-logo">
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories" id="nuevos">
+        <h2 class="section-title">Explora por <span>Categorías</span></h2>
+        <p class="section-subtitle">Encuentra tu estilo en nuestra selección curada</p>
+        <div class="categories-grid">
+            <div class="category-card">
+                <i class="fas fa-tshirt category-icon"></i>
+                <div class="category-info">
+                    <h3>Streetwear</h3>
+                    <p>Lo último en moda urbana</p>
+                    <span class="category-link">Ver Colección <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </div>
+            <div class="category-card">
+                <i class="fas fa-vest category-icon"></i>
+                <div class="category-info">
+                    <h3>Outerwear</h3>
+                    <p>Chaquetas y abrigos</p>
+                    <span class="category-link">Ver Colección <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </div>
+            <div class="category-card">
+                <i class="fas fa-shoe-prints category-icon"></i>
+                <div class="category-info">
+                    <h3>Sneakers</h3>
+                    <p>Calzado exclusivo</p>
+                    <span class="category-link">Ver Colección <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </div>
+            <div class="category-card">
+                <i class="fas fa-shopping-bag category-icon"></i>
+                <div class="category-info">
+                    <h3>Accesorios</h3>
+                    <p>Complementa tu look</p>
+                    <span class="category-link">Ver Colección <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products">
+        <h2 class="section-title">Productos <span>Destacados</span></h2>
+        <p class="section-subtitle">Nuestra selección premium para ti</p>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image">
+                    <span class="product-badge">Nuevo</span>
+                    <i class="fas fa-tshirt"></i>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Streetwear</div>
+                    <h3>Oversized Tee Purple</h3>
+                    <p>Camiseta oversized de algodón premium con estampado exclusivo</p>
+                    <div class="product-footer">
+                        <span class="product-price"><span>$</span>29.99</span>
+                        <button class="add-to-cart">Agregar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <span class="product-badge sale">-20%</span>
+                    <i class="fas fa-hoodie"></i>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Streetwear</div>
+                    <h3>Urban Hoodie Black</h3>
+                    <p>Sudadera con capucha premium de tejido suave</p>
+                    <div class="product-footer">
+                        <span class="product-price"><span>$</span>49.99</span>
+                        <button class="add-to-cart">Agregar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <i class="fas fa-vest-patches"></i>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Outerwear</div>
+                    <h3>Cargo Pants Purple</h3>
+                    <p>Pantalón cargo aesthetic con múltiples bolsillos</p>
+                    <div class="product-footer">
+                        <span class="product-price"><span>$</span>59.99</span>
+                        <button class="add-to-cart">Agregar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <span class="product-badge">Nuevo</span>
+                    <i class="fas fa-shoe-prints"></i>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Sneakers</div>
+                    <h3>Platform Sneakers</h3>
+                    <p>Zapatillas plataforma de diseño exclusivo</p>
+                    <div class="product-footer">
+                        <span class="product-price"><span>$</span>79.99</span>
+                        <button class="add-to-cart">Agregar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="newsletter-container">
+            <h2>Únete al Club Nabby</h2>
+            <p>Suscríbete y recibe un 10% de descuento en tu primera compra + acceso anticipado a nuevas colecciones</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Tu email aquí..." required>
+                <button type="submit">Suscribirme</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <img src="data:image/webp;base64,UklGRkgNAABXRUJQVlA4IDwNAACQPQCdASoKAW8APm0ylEgkIqIhInOdKIANiWcA1McPyYn+B9HbG9Fm2U51r0p/47fft6QwFH+4dsX9+/KTsZ/Iftdu9epB8i+w34n+zfuT+Yfx9/tPDfogfYR+Qfzr/Ffl3waAAP0D+x/6fw/dTLwV7AH80/sH+x/rHtp/ufB2879gL+U/3z1ZP7r/0f6j8u/bX+gf7H/0f6n4Cf5p/c/+P2H/R2OPbTYkOoJD63+IocEiZaBO2mMW5Ztnn6u31i4r/CFcDPr89Jz8XrfteqckLQdZVFncNAuDTK0zd8BMh/rBjO4yDpuj3VjDVRtueodQBQthjx3+zOPWkKojjgj3IX1E0eMTQL7WwfIzPPLvzYb6zjYSUHu/G8Sc/Sclb0+6d+pOhedIWPu88ZK9zqt1GRL2XCViSpzLxbNPWge/SW6Q1An2cSTjUWkZDTfrZvTc3iUP2obK2Uc9r0MbMrKJ7FBYirrbgoHnCiL9gDp25lywHyAc4hHM8hcUtuGSWe6DsWJ1Zps6CYxPYMP3YtvPzDS1gdHH45irOoeaXNRDK/4odmAyiVNHDcOFQYiBBSfubCzboN6ZAhLedekKY+Ps4LEHn+rjzkgVVriIfMIePaBXosxQlfAZIFQ01yK3vM6kZWxF6HSmMCP1zH4IhEZ4UjsPvAAA/vyhx6me+VM6f/5um2TLUAAAAOXvvhkeVbWKDAAA0dJUsRrON7GMfDz0jmO0SaizRUQqwPQAF/PFDiQLwbNbW4XXqzXLwH+cW5eTVKybzZdBBawrPYyDQif8w2Blb5/YzTDrUYSHF1zi0lEfJ4PyWOWj+viU0E6mnehlSmoRE+xvnMxkSRkQIH4gV1bYVC/u0NqzO5wmC8AThlJO7pzS4u9hr0rCg04DsGTcaCxpStvnyXQ5Esk5Vgo4b7Fr/kKo+JuSw7y2LW5tgcpufYZoURMp8kyf65tVf0Cm3c24YgcH9W8skMTgv+Q1e+Zvx3gfCWMA7N/39leJFmsegmKCLGeVcz8rRrJE/owJKf7wByXe/JDL8Q6bNxdW/nxX3iqz2Df3LrodSKIZg9QjOIeEcSqYxgVF0S/py4pw/en2TjpnRtTSrOPuEzR+H9TCP6V5fIPlABpz+Q8A9cyhIUIcnIs7VpT3wx3lfQlqX/j7wIRtYVt7pUAukxKu9JiDamX0ZCR3PAksnPzD+7LL/pZpWbxYdzYp4iiz9NwXZj4wG2Tn5mVDH19Ca3tGF8lya4gR3oRC6AAmY3a+hM6l1b2n/sVz/1d/u19wHYAaEjkrfjQGb5UApK1pLs5d5nARu/xbbvPaOLKNlryutcf9M2f+OVBfgp5ceiphcyuMh6i88Nsoou9ClEAxMQ2Og7lIXQ0p8S6g8qE/jVqKtQ9dkWM2LUjefVv78NwphVC7+rdh7+v29BkuJviFJeRPcf9rKbJXcqT2yaoPwvm7weVL2FLqTenyXXrrLM73J65c0RUQCkDMEPlpMfVJM+VOseWqH87kC00t2G50f/pxi1KzyMyyijIggke7dGIHsLEF6qHVlGP6b4eZQbOy5OR1hK1qjxjpA93vyJhaV1ymJWQ11E1dzRS2bCncCAxGMZvLF3hGmpDdhAoTAXVGaHoQ/53lu3CPwgsYC3iZb9eCKK0ZVZqFwCi+56fY0CgwmUlt1bpVPabtwBowTgv+NJZYPLWSEzJ0r8YA9cTLbnLEO8v7KBuJsEeHPoN9FK1UstoBJylU5sNeZSg4jyGDMOTcDcQWkCLIYSmDgrLJsJEX2uL9yhISSMa4tSURPkpsnIg3CMl+84M8Q3RSReMyFiSKiQYHH10mWFCqgth96Nt9O5z4lRzk4Rf75F8/LMIlshbAdz22nLi8ckP7Z8pmVVLUD/2gPpUXsmi5dv/E07H9yDEHpMhLgf+gHV7Gp+eTggNFOh/KC+EPcLcCBlbd4+GE4eMTByxG7ZZOn/nZU2q54EKoY0TmXL40HMQOUK5VCRB+ckKeNTyPP9ivyH6WZmfn40Ulz101hX4boy+f9XGuTzgvPeaqkJedsGr9y+x2cU9NXXAWj+npgUWekzsrdM5CegC9d86mCfm4zUniaiD+qdTvMauqOs33zusJujd3Xf01detzWT+qFoMr4oKm/4/iUR5P8F9oemQfTT0bBwGk5CfYF3abox5VFChBSuRZAaWoiJak9V67EBlMR3kKuVDX59qiiIfgyBqz7/eyVHvNaNEP8g+JN1/usL8dRtMXzyuRzz5olbVY1P7wlPOvLuAIucA6S5s/N52Jb2MvoCXiJubiPz4Iu+lOmk41qNTEotzu3F3RGqIyVE31/KeS2BDQmaFP+b5iFPoPiybAD3T1JqGepg+3Ysjv7EOfponFQPI+CnPef2WJEZe7o7yzz9cCpC3EeKJux2rYUvsCyIUL8NVyWPIfGs6OqtdJ5ePVHGJHO1X7npK5R6YVZS4p4F0fgj5QeECGojQuADHOLh5iAgm1Iwj6wJDQoxOfXc1Dxb/fl8UM1CewSWzc7ULf2RZ4CYke/Ez+Ukf1rph+rm45/Y1k19Hn8tY2q2RS4jVa2b5B3IpdKH3BYWCk6HufDd/27Pf6yFJbKVpvJfhOqkCQzZf1ffCeNhZUXgOGkpwfPtf0jOjJVz5XGRFNcDWWe17JgIeBTuP1j/i7GWPIgFA7WWrNZ7O/XJelrLf/QEd7R3IqQnPs77K2XnWRzKgm02N1Z+GAiXhHSyxyXv5ArFo9y/BnAC3h075B+uQSxmdXr8eaJ0XFaZB6YvJnxiWr5idwbx8Gvh7CgidWWD1JDfqL4QWIgJYp+I07bSVKFAKuNWeCYmxUX0bq3ygE7LNWE1hdATjwgnJtbGYoTV4jMY4t/fBhyqkUPvIy6pcfdAun8MG1UXEWt5G+NXcp9jwQmvjMKmNYcgGGzq3I2SkEm67/0ndYBNeuP+NKwF6XxTgQQHFkY51LgFsvm9p4tVjoyy02ATTRONzmhOGpQVymHOGjcLoM1T7BVawNU0U5iATq0QW0OwZ5GB4me+Q8Y1WggbHNcLB+xWL+eiJyujaqFrkbM7brZzNxw17WnxlEHgdjJdTsqEMz7en6uij+NjtGwj5ghGKfSYSJs/APrfjt/hui8ISME7A1SHllWTqT3UnJNVMcqF4TpWHUz30EEamjk+AI2UixVUcSwGa2lGMkiSD5cXhGbFVfphTuRhmxZKBgl3M50JvFTmnAA/rkzSdEZCKFC5pvD++noAbGHtEDMZaNAlf6aXnHVwYY4II0JCIDIcMICMx2tT9iez6HKnXKwHJc94ia8391NYe4xHCVf0cfC8sTIu6MZB1B91ZHiQ8nNI0iQtakPzVbzkMiUZThZqzgqU27q04n6ODHOMj54A7OQAizj16oefJHwomlBPjD+EgDPHXDx5/fCHR0CrZEPTvk77yL/ECu9X/w+QYgvybUzJA/xh3f91RdaWtJghPXh3YdFEPyDsT+kRvGB+G+SXSrgcPwz7OAMl1yao77Dk4/VbnjVFkGUy8wn68bx/CQNCsP7X7CE0ob/AbPTv+Q0ODWjdGXiN2g5VNo6RzLCP0qrI5SbklgvZHs2uQj9KIOeF3jZGEsygGS/KQEP9Qp1JuXk/zyG78RBPq/krzIDhfr+a61vXkCLf2UoBNOvh+f+SRNop0M                                                                                                                                                                               MraFOTJD3iVJ/zKmo+lV0Gz4CDvZLwuiMMvqrSYqL0BnhTcUCMVrksqUx1e9Z8FNw+7kUZhv/KT0BcWCdNNXReu3RCqYdwp0knPd4DSYb4/kVbhdTkFLzrVLhBjQdKdF/rqDIP5eXOj/gBoq/1YE/pJuki4ut6FCi               i1NCY6HokOWJiw5EL1CqqxoSL0rDcwlxnXTgC68DoMhnC0pNoTqu2JqpAzotx742SvOpqZzieTRaKff/PAr/KUEfAzi9s2Ywv/teMQjwWxRymBXyAYYuGcNVrlXCjG6Bp0XR1OmJlo7vpbS8a1FKV3Ci+Dl9BVycR               RyxOVpWadLk7GuoD+iiCZuVlPchgWY5RIwZwISgxoeJZkvjqT/Pa8kpJjTUgwdDZ9WZSXqrqVj4WRlW7T/h2k1D4fMcR6rc+fdRZZFe7EmDbNea8F+FPsKYbCb94kkfnKNjLD0Yaq4yvnGW+7urdZ3TrPp4wDqDCc               czrtZbGRWozPYzQrVtNOUxG9im1G8z6xXNHRYSMkBJtmiSoAba/EsjMct8v6NTBaO6qUsIz+ZlXX10z9+/pEpXSu67rzwrrsSoFze1OX4ww+jWAOPt8lhTaSq5x/5Zi/lKoB9UTUTnA5SIYa0BWGIlnJ4kkjdNSvO               O/kvXItWwQOsLgVPyYFV6RUINZYqr0NEn20M5EmfVL14T5mrdBFoBMgLiJNEzZrgFOTBh3Nt7OCLvL+Bydih15ML9xOx6gQa43IGt6OCK2WAccFKFUq0vuy6IJUY68pPa4gJeoRGf3UFkoNreHGwCs0nl/YF5+6gN               NaSusUDEkeQE+yVoobKOpoIf3vnFCxnRtJgihEpQjYh6AZSEI8i3FHgtLAjgQAAAA" alt="NabbyShop Logo">
+
+                </div>
+                <p>Tu destino para la moda urbana y aesthetic. Estilo único para personas que marcan tendencia y expresan su autenticidad sin límites.</p>
+                <div class="social-links">
+                    <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                    <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Comprar</h4>
+                <ul>
+                    <li><a href="#">Nuevos</a></li>
+                    <li><a href="#">Mujer</a></li>
+                    <li><a href="#">Hombre</a></li>
+                    <li><a href="#">Accesorios</a></li>
+                    <li><a href="#">Sale</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Ayuda</h4>
+                <ul>
+                    <li><a href="#">Envíos</a></li>
+                    <li><a href="#">Devoluciones</a></li>
+                    <li><a href="#">Guía de Tallas</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Empresa</h4>
+                <ul>
+                    <li><a href="#">Sobre Nosotros</a></li>
+                    <li><a href="#">Sostenibilidad</a></li>
+                    <li><a href="#">Carreras</a></li>
+                    <li><a href="#">Prensa</a></li>
+                    <li><a href="#">Términos</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 NabbyShop. Todos los derechos reservados.</p>
+            <div class="payment-methods">
+                <i class="fab fa-cc-visa"></i>
+                <i class="fab fa-cc-mastercard"></i>
+                <i class="fab fa-cc-paypal"></i>
+                <i class="fab fa-cc-apple-pay"></i>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll behavior
+        let lastScroll = 0;
+        const header = document.querySelector('.header');
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                header.style.transform = 'translateY(-100%)';
+            } else {
+                header.style.transform = 'translateY(0)';
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Add to cart functionality
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const originalText = this.textContent;
+                this.textContent = 'AGREGADO ✓';
+                this.style.background = 'var(--primary-purple)';
+                
+                // Update cart badge
+                const cartBadge = document.querySelector('.cart-badge');
+                let currentCount = parseInt(cartBadge.textContent);
+                cartBadge.textContent = currentCount + 1;
+                
+                setTimeout(() => {
+                    this.textContent = originalText;
+                    this.style.background = 'var(--dark-purple)';
+                }, 2000);
+            });
+        });
+
+        // Newsletter form
+        const newsletterForm = document.querySelector('.newsletter-form');
+        newsletterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const button = this.querySelector('button');
+            const originalText = button.textContent;
+            button.textContent = '¡SUSCRITO!';
+            button.style.background = 'var(--light-purple)';
+            
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.background = 'var(--white)';
+                this.reset();
+            }, 3000);
+        });
+
+        // Mobile menu toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        menuToggle.addEventListener('click', () => {
+            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+        });
+    </script>
+</body>
+</html>

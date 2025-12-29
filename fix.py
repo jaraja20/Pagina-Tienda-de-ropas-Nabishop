@@ -1,0 +1,22 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+with open('nabbyshop-final.html', 'r', encoding='utf-8') as f:
+    html = f.read()
+
+# Reemplazar logo base64 antiguo
+html = html.replace(
+    'src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQoAAABvCAIAAACb5xnDAAABCGlDQ1BJQ0MgUHJvZmlsZQAAeJxjYGA8wQAELAYMDLl5JUVB7k4KEZFRCuwPGBiBEAwSk4sLGHADoKpv1yBqL+viUYcLcKakFicD6Q9ArFIEtBxopAiQLZIOYWuA2EkQtg2IXV5SUAJkB4DYRSFBzkB2CpCtkY7ETkJiJxcUgdT3ANk2uTmlyQh3M/Ck5oUGA2kOIJZhKGYIYnBncAL5H6IkfxEDg8VXBgbmCQixpJkMDNtbGRgkbiHEVBYwMPC3MDBsO48QQ4RJQWJRIliIBYiZ0tIYGD4tZ2DgjWRgEL7AwMAVDQsIHG5TALvNnSEfCNMZchhSgSKeDHkMyQx6QJYRgwGDIYMZAKbWPz9HbOBQAABV7klEQVR4nO29d5wcxZU/ek5V3dBpsnLOWQIJCRTISAgRDYacsMF4F+O33n3789rY3ue1Dfy8xjlhY4NtTPISbEAkI5CECJIQKKCccxhNnul0Q1Wd90d19/RogkYaYa9350t/hlHPvbfCrVMnn8Ljx48DQFVVFSICgPlZDCIq/mf7C3rRi/+pYGEYVlVVAQAinrD0iegE2uhFL/5XgTU2Nvq+HwRB4SvK42/YrV704r8DRP/+/RFRaw3t5Khe9OJ/ObCXJHrRi87A/tYd6EUv/vuilzx60YtO0UsevehFp+glj170olP0kkcvetEpesmjF73olP0kkcvetEpeskjF73olf0k0UsevehFL/5Xg4EhfB/6vS8KFCjgKVQoUMAS2t+6A73oRXf+t+6AXvTifw0ixKrSwTEgFHuRN1+gFy/T0v87d6AXvfhfhULxUpAo/u3qV6+8fGS4fM8FMq7LQW8sJbhL2mqV5oIFVEfUCw08rWKGW0u3D7Kc39+1JXz7eDjfexaGWJ9qo4FOHP+KM4Y8Ln0eCLvT6xwJpkBxXvVHZ9Gy9l6hRyJWIWbqKWsHbdOVTIXLcFzm3EJsIzTBLhfSbLSDMj48z8qrGxb0h7EnjQqmVVb+bAJP4PFVwYG5gkIsaSZDAzbWxkYJG4hxFQWMDDwtzAwbDuPEEOESUFiUSJZiAWImdLSGBg+LWdg4I1kYBC+wMDAFQ0LCBxuUwHx30SvHo0dAEU9L6QhxVU08j5iMn2OqRAX8LrKJJP3G9zYz3CiM7vN4JXh+DqYTL13vixZ/rJ12r0Y9B5/qNMq3AKM7lkTpSPXiBcKNtGPY5z4r6zXUDmLhWk6B6kEMJVSTLTfEkHVSQQAL64l+QlJXdlb7qwUjCy1zHb3HigEr1LFJCT6x0mB6hEhHoN18oQvlYJPkkFBKhxCRrAW1uV9S9qXEwS5BCKuEjUOX8rMKCrKvF0vgfzxAkh5nG4cKXmx0gKOh8b7MqJZOj9CnE7cShJZWkJg5vDNHqRQwlmS5xJM6eJNjSTw7M9xxvV1/jUH5jEIeUcsJzP0R7/HquVCRnDFnJaWFZbFQg7cJSZL8HqJZST4CU8k6TQvdXyXe6TdG1Tl4xYqc0QQXST6j9yKuGRaQWBBsHeEZm3KX5YPT9DxEKkfbKX5rwFJJZDvvgq0W7BRiKDxaWyIqzabjl4Q93MhLRIlYkKgrgLuI8vLYp6bI9E+jk7vV1E0DwSknWvfqYQ5yIe/lGY4S1EhUhGBQ"',
+    'src="imagenes/iconos/icono-transparente.png"'
+)
+
+# Reemplazar butterfly base64 antiguo
+html = html.replace(
+    'src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANMAAAC7CAYAAAD/oKvuAAA5d0lEQVR4nO2dd1wU1/r/nzH2Ek001hh7V0BEQHpTUMGlg9QFQURRsSe535vv/eb+rrGhokgvK006LF2kLdvIztzdzswx0zPHGZkMz8zZXsB9d8gybhBdvqJR7rDzT5jvI',
+    'src="imagenes/mariposas/mariposa-morado-oscuro.png"'
+)
+
+with open('nabbyshop-final.html', 'w', encoding='utf-8') as f:
+    f.write(html)
+
+print('✓ Imágenes reemplazadas exitosamente')
